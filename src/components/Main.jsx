@@ -15,6 +15,13 @@ export default function Main() {
             .then(resData => setAllMemes(resData.data.memes))
     }, [])
 
+    function handleClick() {
+        const randomMeme = Math.floor(Math.random() * allMemes.length)
+        setMeme(prev => {
+            return {...prev, imgUrl: allMemes[randomMeme].url}
+        })
+    }
+
     function handleChange(e) {
         const { name, value } = e.target
         
@@ -45,7 +52,7 @@ export default function Main() {
                         value={meme.bottomText}
                     />
                 </label>
-                <button><span>Get a new meme image 🖼</span></button>
+                <button onClick={handleClick}><span>Get a new meme image 🖼</span></button>
             </div>
             <div className="meme">
                 <img src={meme.imgUrl} />
